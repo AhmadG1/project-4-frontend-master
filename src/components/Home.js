@@ -1,4 +1,5 @@
 import React from "react";
+import apiUrl from "../apiConfig";
 
 class Home extends React.Component {
     state = {
@@ -8,32 +9,50 @@ class Home extends React.Component {
     componentDidMount() {
         // AJAX call to the back end to fetch the recipes and then set the state with them
         // for now using an array
-        this.setState({
-            recipes: [ 
-                {name: 'Buddha Bowl', image: 'https://tse2.mm.bing.net/th?id=OIP.frwuctRxqaHZiAMXi6h9oQHaKT', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-                {name: 'Roasted Zuchinni Burger', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2016/06/Roasted-Zucchini-Burgers-with-Garlic-Whipped-Feta-6.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-                {name: 'Rice Paper Rolls', image: 'https://veganheaven.org/wp-content/uploads/2016/07/Rice-Paper-Rolls-with-Mango-and-Mint-13.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-                {name: 'Stuffed Mushrooms', image: 'https://veganhuggs.com/wp-content/uploads/2017/12/crabless-vegan-stuffed-mushrooms-3-1024x683.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-                {name: 'Muffins', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2015/07/Double-Chocolate-Coconut-oil-Zucchini-Muffins-with-Caramelized-Buckwheat-6.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-                {name: 'Noodles', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2019/02/Better-Than-Takeout-Szechuan-Noodles-with-Sesame-Chili-Oil-1-1-700x1050.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
-            ]
-        })
+        const url = `${apiUrl}/api/recipes/`
+        fetch(url, {
+            mode: "cors",
+            credentials: "include",
+            method: "GET",
+            headers: {
+              "Content-type": "application/json"
+            },
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.status > 200) this.setState({ err: data.message });
+              else {
+                this.setState({ err: null });
+                
+                this.setState( {recipes:data.recipes})
+
+                console.log("data", this.state.recipes);
+              }
+            })
+            .catch(e => console.log(e));
+
+        // this.setState({
+        //     recipes: [ 
+        //         {name: 'Buddha Bowl', image: 'https://tse2.mm.bing.net/th?id=OIP.frwuctRxqaHZiAMXi6h9oQHaKT', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //         {name: 'Roasted Zuchinni Burger', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2016/06/Roasted-Zucchini-Burgers-with-Garlic-Whipped-Feta-6.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //         {name: 'Rice Paper Rolls', image: 'https://veganheaven.org/wp-content/uploads/2016/07/Rice-Paper-Rolls-with-Mango-and-Mint-13.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //         {name: 'Stuffed Mushrooms', image: 'https://veganhuggs.com/wp-content/uploads/2017/12/crabless-vegan-stuffed-mushrooms-3-1024x683.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //         {name: 'Muffins', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2015/07/Double-Chocolate-Coconut-oil-Zucchini-Muffins-with-Caramelized-Buckwheat-6.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //         {name: 'Noodles', image: 'https://www.halfbakedharvest.com/wp-content/uploads/2019/02/Better-Than-Takeout-Szechuan-Noodles-with-Sesame-Chili-Oil-1-1-700x1050.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.' },
+        //     ]
+        // })
     }
     render() {
-      const recipes = this.state.recipes.map(recipe => {
-        const customStyle = {
-            background: "url(" + recipe.image + ") ",
-            backgroundSize: "cover"
-            
-        }
-        return (
+        const recipes = this.state.recipes.map(recipe => { 
+          //   return <h1> {recipe.id}</h1>
+          const customStyle = {
+              background: "url(" + recipe.image + ")",
+          }
+          return (
             <div className= 'col-sm-12 col-md-3 recipe-box m-4' style={customStyle}>
                 <div className='foodpic'> 
-                    <div>
-                        <div className='description'>{recipe.name}
-                        <hr/>
-                        <div>{recipe.description}</div>
-                        </div>
+                    <div onClick={() => { this.props.setActiveRecipe(recipe) }}>
+                        <div className='description'>{recipe.title} </div>
                     </div>
                 </div>
             </div> 
