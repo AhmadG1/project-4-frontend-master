@@ -44,6 +44,7 @@ class ChangePasswordForm extends Component {
   render() {
     return (
       <div className="pt-5 mt-5">
+      <style>{'body { background: url(https://c.pxhere.com/photos/0f/35/abstract_beans_black_coffee_black_and_white_blur_caffeine_close_up_coffee-938890.jpg!d) no-repeat center center fixed; background-size: cover; }'}</style>
         <h1>Change Password</h1>
 
         <form onSubmit={this.handleSubmit}>

@@ -52,7 +52,8 @@ class Home extends React.Component {
             <div className= 'col-sm-12 col-md-3 recipe-box m-4' style={customStyle}>
                 <div className='foodpic'> 
                     <div onClick={() => { this.props.setActiveRecipe(recipe) }}>
-                        <div className='description'>{recipe.title} </div>
+                        <h1 className='description'>{recipe.title} </h1>
+                        <div className='title'>{recipe.description}</div>
                     </div>
                 </div>
             </div> 

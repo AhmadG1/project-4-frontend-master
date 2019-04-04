@@ -47,6 +47,7 @@ class SignupForm extends Component {
   render() {
     return (
       <div className="pt-5 mt-5">
+      <style>{'body { background: url(https://c.pxhere.com/photos/0f/35/abstract_beans_black_coffee_black_and_white_blur_caffeine_close_up_coffee-938890.jpg!d) no-repeat center center fixed; background-size: cover; }'}</style>
         <h1>PLEASE SIGNUP</h1>
         {this.state.err ? (
           <div className="alert alert-warning"> {this.state.err} </div>
@@ -78,7 +79,7 @@ class SignupForm extends Component {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" class="btn btn-secondary">
             Login
           </button>
         </form>

@@ -85,7 +85,7 @@ handleSubmit = e => {
             />
           </div>
 
-          <button type="" className="btn btn-primary">
+          <button type="" className="btn btn-secondary">
            Submit
           </button>
         </form>

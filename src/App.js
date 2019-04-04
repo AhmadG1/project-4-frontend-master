@@ -45,7 +45,7 @@ class App extends Component {
   };
   onSignin = () => {
     this.setState({ user: getUser() });
-    this.changeActivePage("profile");
+    this.changeActivePage("home");
   };
   onSignout = () => {
     console.log("sign out");
@@ -84,7 +84,6 @@ class App extends Component {
           {activePage === "show-recipe" ? <ShowRecipe recipe= { this.state.activeRecipe} changeActivePage={this.changeActivePage} /> : ""}
           {activePage === "create-recipe" ? <CreateRecipe changeActivePage={this.changeActivePage} /> : ""}
           {activePage === "edit-recipe" ? <EditRecipe id={this.state.activeRecipe.id} changeActivePage={this.changeActivePage} /> : ""}
-
         </div>
       </div>
     );

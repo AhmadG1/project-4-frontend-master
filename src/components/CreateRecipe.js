@@ -47,6 +47,7 @@ class CreateRecipe extends Component {
   render() {
     return (
       <div className="pt-5 mt-5">
+      <style>{'body { background: url(https://www.wallpaperup.com/uploads/wallpapers/2012/11/02/21173/cd4d565c7a8e5c6f919576940b4caab4.jpg) no-repeat center center fixed; background-size: cover; }'}</style>
         <h1>Create Recipe</h1>
         {this.state.err ? (
           <div className="alert alert-warning"> {this.state.err} </div>
@@ -86,7 +87,7 @@ class CreateRecipe extends Component {
             />
           </div>
 
-          <button type="" className="btn btn-primary">
+          <button type="" class="btn btn-secondary">
            Submit
           </button>
         </form>

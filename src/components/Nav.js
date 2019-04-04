@@ -2,6 +2,7 @@ import React from "react";
 
 const authenticatedOptions = (changeActivePage, onSignout) => (
   <React.Fragment>
+    <li><h1 className="logo" onClick={() => changeActivePage("home")}> Recipes </h1></li>
     <li
       className="nav-item"
       onClick={() => changeActivePage("change-password")}
@@ -11,13 +12,13 @@ const authenticatedOptions = (changeActivePage, onSignout) => (
     <li className="nav-item" onClick={() => onSignout()}>
       <div className="nav-link">Sign Out</div>
     </li>
-    <li><button onClick={() => changeActivePage("create-recipe")}> Create Recipe </button></li>
+    <li><button class="btn btn-secondary" onClick={() => changeActivePage("create-recipe")}> Create Recipe </button></li>
   </React.Fragment>
 );
 
 const unauthenticatedOptions = changeActivePage => (
   <React.Fragment>
-    <li><h1 onClick={() => changeActivePage("home")}> Recipes </h1></li>
+    <li><h1 className="logo" onClick={() => changeActivePage("home")}> Recipes </h1></li>
     <li className="nav-item" onClick={() => changeActivePage("sign-in")}>
       <div className="nav-link">Sign In</div>
     </li>
